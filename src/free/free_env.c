@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_env.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wnguyen <wnguyen@student.42.fr>            +#+  +:+       +#+        */
+/*   By: edesaint <edesaint@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 17:02:01 by edesaint          #+#    #+#             */
-/*   Updated: 2024/02/01 13:51:19 by wnguyen          ###   ########.fr       */
+/*   Updated: 2024/02/01 16:01:26 by edesaint         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,11 @@ void	free_node(t_node *node)
 	{
 		free(node->redir_append);
 		node->redir_append = NULL;
+	}
+	if (node->redir_heredoc)
+	{
+		free(node->redir_heredoc);
+		node->redir_heredoc = NULL;
 	}
 	free(node);
 	node = NULL;

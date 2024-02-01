@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_node.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wnguyen <wnguyen@student.42.fr>            +#+  +:+       +#+        */
+/*   By: edesaint <edesaint@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 12:04:42 by edesaint          #+#    #+#             */
-/*   Updated: 2024/02/01 14:08:22 by wnguyen          ###   ########.fr       */
+/*   Updated: 2024/02/01 15:30:49 by edesaint         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ t_node	*create_node(t_data *data)
 	node->redir_in = NULL;
 	node->redir_out = NULL;
 	node->redir_append = NULL;
+	node->redir_heredoc = NULL;
 	node->next = NULL;
 	return (node);
 }

@@ -1,4 +1,15 @@
 
+
+
+gerer le cas: echo $?
+
+
+
+
+
+
+
+--------------------------------------------------------------------
 - WILL doit gerer le cas ou une commande ou un argument vaut rien
     - voir enlever les arguments qui ne servent a rien au moment du parsing
 - gestion des signaux

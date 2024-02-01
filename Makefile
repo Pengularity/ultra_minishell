@@ -19,6 +19,7 @@ SRC_FILES = main.c \
 			parser/parser.c \
 			parser/parser_tab_exec.c \
 			parser/parser_redir.c \
+			parser/parser_set_redirs.c \
 			parser/parser_redir_utils.c \
 			parser/parser_utils_1.c \
 			parser/parser_utils_2.c \
@@ -42,6 +43,7 @@ SRC_FILES = main.c \
 			exec/exec_cmd.c \
 			exec/exec_redir.c \
 			exec/exec_is_redir.c \
+			exec/exec_fd_redir.c \
 			exec/get_path.c \
 			exec/exec_pipeline.c \
 			env/env_utils.c \

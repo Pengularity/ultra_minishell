@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_redir.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wnguyen <wnguyen@student.42.fr>            +#+  +:+       +#+        */
+/*   By: edesaint <edesaint@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 16:15:57 by edesaint          #+#    #+#             */
-/*   Updated: 2024/02/01 14:01:51 by wnguyen          ###   ########.fr       */
+/*   Updated: 2024/02/01 15:44:02 by edesaint         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ bool	sub_process_heredoc(t_env *env, t_node *node, char *delimiter)
 {
 	int	fd;
 
-	node->redir_in = get_name_heredoc();
-	fd = open(node->redir_in, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	node->redir_heredoc = get_name_heredoc();
+	fd = open(node->redir_heredoc, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (fd < 0)
 		return (false);
 	get_and_save_heredoc_content(env, fd, delimiter);
@@ -33,23 +33,13 @@ bool	update_redir(t_env *env, t_node *node, t_token *token)
 	if (is_file_redir(token))
 	{
 		if (token->type_token == T_REDIR_IN)
-			node->redir_in = name;
+			set_redir_in(node, name);
 		if (token->type_token == T_REDIR_OUT)
-		{
-			node->redir_out = name;
-			node->redir_append = NULL;
-		}
+			set_redir_out(node, name);
 		if (token->type_token == T_REDIR_APPEND)
-		{
-			node->redir_append = name;
-			node->redir_out = NULL;
-		}
+			set_redir_append(node, name);
 		if (token->type_token == T_REDIR_HEREDOC)
-		{
-			free(name);
-			if (!sub_process_heredoc(env, node, token->next->str))
-				return (false);
-		}
+			set_redir_heredoc(node, token, env, name);
 	}
 	return (true);
 }
