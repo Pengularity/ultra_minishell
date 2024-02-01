@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wnguyen <wnguyen@student.42.fr>            +#+  +:+       +#+        */
+/*   By: edesaint <edesaint@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 12:33:07 by blax              #+#    #+#             */
-/*   Updated: 2024/02/01 13:51:40 by wnguyen          ###   ########.fr       */
+/*   Updated: 2024/02/01 16:00:52 by edesaint         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,11 @@ void	free_redirs(t_node *node)
 	{
 		free(node->redir_append);
 		node->redir_append = NULL;
+	}
+	if (node->redir_heredoc)
+	{
+		free(node->redir_heredoc);
+		node->redir_heredoc = NULL;
 	}
 }
 

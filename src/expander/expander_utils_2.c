@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander_utils_2.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wnguyen <wnguyen@student.42.fr>            +#+  +:+       +#+        */
+/*   By: edesaint <edesaint@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 09:27:15 by blax              #+#    #+#             */
-/*   Updated: 2024/02/01 13:46:28 by wnguyen          ###   ########.fr       */
+/*   Updated: 2024/02/01 17:01:37 by edesaint         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,13 @@ char	*extract_var_name(char **str)
 	const char	*start;
 
 	start = *str;
-	while (ft_isalnum(**str) || **str == '_')
+	if (**str == '?')
 		(*str)++;
+	else
+	{
+		while (ft_isalnum(**str) || **str == '_')
+			(*str)++;
+	}
 	return (ft_strndup(start, *str - start));
 }
 
@@ -53,13 +58,11 @@ char	*get_var_value(char *result, char *var_value)
 	new_length = ft_strlen(result) + ft_strlen(var_value) + 1;
 	new_result = malloc(sizeof(char) * new_length);
 	if (!new_result)
-	{
-		free(var_value);
 		return (NULL);
-	}
 	ft_strlcpy(new_result, result, new_length);
 	ft_strlcat(new_result, var_value, new_length);
 	free(var_value);
+	var_value = NULL;
 	return (new_result);
 }
 
@@ -67,6 +70,7 @@ char	*append_variable_value(t_env *env, char *result, char *var_name)
 {
 	char	*var_value;
 
+	var_value = NULL;
 	if (ft_strcmp(var_name, "?") == 0)
 	{
 		var_value = ft_itoa(env->lst_exit);
@@ -82,5 +86,6 @@ char	*append_variable_value(t_env *env, char *result, char *var_name)
 	if (var_value)
 		return (get_var_value(result, var_value));
 	free(var_value);
-	return (ft_strdup(result));
+	var_value = NULL;
+	return (result);
 }
