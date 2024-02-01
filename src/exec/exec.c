@@ -6,7 +6,7 @@
 /*   By: wnguyen <wnguyen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 10:04:08 by blax              #+#    #+#             */
-/*   Updated: 2024/02/01 13:11:44 by wnguyen          ###   ########.fr       */
+/*   Updated: 2024/02/01 19:32:22 by wnguyen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,7 @@ void	execute_command_node(t_node *node, t_env *env)
 	int	stdout_backup;
 	int	stdin_backup;
 
+	g_signal = IN_EXEC;
 	if (!node)
 		return ;
 	stdout_backup = dup(STDOUT_FILENO);

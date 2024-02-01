@@ -6,7 +6,7 @@
 /*   By: wnguyen <wnguyen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 16:22:37 by blax              #+#    #+#             */
-/*   Updated: 2024/02/01 14:28:23 by wnguyen          ###   ########.fr       */
+/*   Updated: 2024/02/01 17:45:17 by wnguyen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,15 @@ typedef enum e_status {
 
 typedef enum e_redir {
 	IN = 0,
-	OUT = 1
+	OUT = 1,
 }	t_redir;
+
+typedef enum e_shell_state {
+	IN_PROMPT = 1,
+	IN_EXEC = 2,
+	IN_HEREDOC = 3,
+	SIG_INT = 4,
+}	t_shell_state;
 
 typedef enum e_state {
 	T_NULL,

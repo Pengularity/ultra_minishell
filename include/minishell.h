@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: edesaint <edesaint@student.42.fr>          +#+  +:+       +#+        */
+/*   By: wnguyen <wnguyen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 08:31:10 by blax              #+#    #+#             */
-/*   Updated: 2024/02/01 15:45:19 by edesaint         ###   ########.fr       */
+/*   Updated: 2024/02/01 17:38:40 by wnguyen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -194,10 +194,11 @@ bool			init_redir(t_data *data, t_node *node, t_token *token);
 bool			sub_process_heredoc(t_env *env, t_node *node, char *delimiter);
 
 // parser_set_redirs.c
-void	set_redir_in(t_node *node, char *name);
-void	set_redir_out(t_node *node, char *name);
-void	set_redir_append(t_node *node, char *name);
-bool	set_redir_heredoc(t_node *node, t_token *token, t_env *env, char *name);
+void			set_redir_in(t_node *node, char *name);
+void			set_redir_out(t_node *node, char *name);
+void			set_redir_append(t_node *node, char *name);
+bool			set_redir_heredoc(t_node *node, t_token *token,
+					t_env *env, char *name);
 
 // parser_redir_utils.c
 bool			is_redir(t_state type);
@@ -291,9 +292,9 @@ bool			is_redir_in(char *name);
 bool			is_redir_out(char *name, int type_redir);
 
 // exec_fd_redir.c
-bool	redir_in(t_node *node);
-bool	redir_heredoc(t_node *node);
-bool	redir_out(int fd, const char *file, bool type_redir);
+bool			redir_in(t_node *node);
+bool			redir_heredoc(t_node *node);
+bool			redir_out(int fd, const char *file, bool type_redir);
 
 // exec_builtin.c
 bool			is_builtin(t_node *node);

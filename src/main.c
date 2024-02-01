@@ -6,7 +6,7 @@
 /*   By: wnguyen <wnguyen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 18:23:51 by blax              #+#    #+#             */
-/*   Updated: 2024/02/01 14:23:56 by wnguyen          ###   ########.fr       */
+/*   Updated: 2024/02/01 19:28:01 by wnguyen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ bool	ft_main(t_data *data, t_env *env)
 	free(data);
 	data = NULL;
 	execute_command_node(first_node, env);
+	g_signal = IN_PROMPT;
 	return (true);
 }
 
@@ -63,6 +64,7 @@ int	main(int argc, char *argv[], char **env)
 	else
 		my_env = init_env(env);
 	update_shlvl(my_env);
+	g_signal = IN_PROMPT;
 	main_loop(my_env);
 	free_env(my_env);
 	return (0);
@@ -83,24 +85,24 @@ bool	process_command(char *command, t_env *my_env)
 	return (true);
 }
 
-bool	main_loop(t_env *my_env)
+bool	main_loop(t_env *env)
 {
 	char	*command;
 
 	while (1)
 	{
-		if (g_signal)
-		{
-			g_signal = 0;
-			continue ;
-		}
+		// if (g_signal == SIG_INT)
+		// {
+		// 	env->lst_exit = 130;
+		// 	g_signal = IN_PROMPT;
+		// }
 		command = readline("minishell> ");
 		if (!command || handle_ctrl_d(command))
 		{
 			free(command);
 			break ;
 		}
-		if (!process_command(command, my_env))
+		if (!process_command(command, env))
 			return (free(command), false);
 		free(command);
 	}
