@@ -3,20 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils_1.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: edesaint <edesaint@student.42.fr>          +#+  +:+       +#+        */
+/*   By: wnguyen <wnguyen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 09:04:32 by blax              #+#    #+#             */
-/*   Updated: 2024/01/28 18:19:35 by edesaint         ###   ########.fr       */
+/*   Updated: 2024/02/01 14:03:08 by wnguyen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-bool is_command(bool *is_cmd, t_state cur_state)
+bool	is_command(bool *is_cmd, t_state cur_state)
 {
 	if (cur_state != T_NULL)
 		return (false);
-   	if (!*is_cmd)
+	if (!*is_cmd)
 	{
 		*is_cmd = true;
 		return (true);
@@ -24,9 +24,9 @@ bool is_command(bool *is_cmd, t_state cur_state)
 	return (false);
 }
 
-bool is_pipe(char *str, bool *is_cmd)
+bool	is_pipe(char *str, bool *is_cmd)
 {
-    if (ft_strcmp(str, "|") == 0)
+	if (ft_strcmp(str, "|") == 0)
 	{
 		*is_cmd = false;
 		return (true);
@@ -34,7 +34,7 @@ bool is_pipe(char *str, bool *is_cmd)
 	return (false);
 }
 
-t_state what_redirection(char *str)
+t_state	what_redirection(char *str)
 {
 	if (ft_strcmp(str, ">") == 0)
 		return (T_REDIR_OUT);
@@ -47,7 +47,7 @@ t_state what_redirection(char *str)
 	return (T_NULL);
 }
 
-bool is_type_redir(t_state type_token)
+bool	is_type_redir(t_state type_token)
 {
 	return (
 		type_token == T_REDIR_IN || \

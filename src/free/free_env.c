@@ -6,42 +6,42 @@
 /*   By: wnguyen <wnguyen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 17:02:01 by edesaint          #+#    #+#             */
-/*   Updated: 2024/02/01 13:14:19 by wnguyen          ###   ########.fr       */
+/*   Updated: 2024/02/01 13:51:19 by wnguyen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-static void    free_env_link(t_env_link *link)
+static void	free_env_link(t_env_link *link)
 {
-    if (link)
-    {
-        free(link->name);
-        link->name = NULL;
-        free(link->content);
-        link->content = NULL;
-        free(link);
-        link = NULL;
-    }
+	if (link)
+	{
+		free(link->name);
+		link->name = NULL;
+		free(link->content);
+		link->content = NULL;
+		free(link);
+		link = NULL;
+	}
 }
 
-void    free_env(t_env *env)
+void	free_env(t_env *env)
 {
-    t_env_link    *current;
-    t_env_link    *tmp;
+	t_env_link	*current;
+	t_env_link	*tmp;
 
-    if (env && env->first)
-    {
-        current = env->first;
-        while (current)
-        {
-            tmp = current;
-            current = current->next;
-            free_env_link(tmp);
-        }
-        free(env);
-        env = NULL;
-    }
+	if (env && env->first)
+	{
+		current = env->first;
+		while (current)
+		{
+			tmp = current;
+			current = current->next;
+			free_env_link(tmp);
+		}
+		free(env);
+		env = NULL;
+	}
 }
 
 void	free_node(t_node *node)

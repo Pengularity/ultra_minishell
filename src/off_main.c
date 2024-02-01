@@ -6,38 +6,36 @@
 /*   By: wnguyen <wnguyen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 18:26:34 by blax              #+#    #+#             */
-/*   Updated: 2024/02/01 13:09:44 by wnguyen          ###   ########.fr       */
+/*   Updated: 2024/02/01 14:27:18 by wnguyen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-int				g_info;
-
-int main(int argc, char *argv[])
+int	main(int argc, char *argv[])
 {
-    t_data *data;
-    t_env	*my_env;
+	t_data	*data;
+	t_env	*my_env;
 
-    if (argc < 2)
-        return (0);
-    my_env = NULL;
-    data = malloc_data(argv[1], my_env);
-    if (!is_closed_quotes(data))
-        ft_error_2(data, "unclosed quotes");
-    ft_lexer(data);
-    if (!data->token)
-        return (free_all(data), 0);
-    determine_token_types(data);
-    if (!verif_syntax(data->token))
-    {
-        ft_error_2(data, "syntax_erreur");
-    }
-    if (!pass_on_filters(data))
-        ft_error_2(data, "filter_erreur");
-    parser(data);
-    print_tokens(data->token);
-    print_nodes(data);
-    free_all(data);
-    return (0);
+	if (argc < 2)
+		return (0);
+	my_env = NULL;
+	data = malloc_data(argv[1], my_env);
+	if (!is_closed_quotes(data))
+		ft_error_2(data, "unclosed quotes");
+	ft_lexer(data);
+	if (!data->token)
+		return (free_all(data), 0);
+	determine_token_types(data);
+	if (!verif_syntax(data->token))
+	{
+		ft_error_2(data, "syntax_erreur");
+	}
+	if (!pass_on_filters(data))
+		ft_error_2(data, "filter_erreur");
+	parser(data);
+	print_tokens(data->token);
+	print_nodes(data);
+	free_all(data);
+	return (0);
 }

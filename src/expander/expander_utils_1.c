@@ -6,20 +6,20 @@
 /*   By: wnguyen <wnguyen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 09:25:56 by blax              #+#    #+#             */
-/*   Updated: 2024/02/01 11:13:31 by wnguyen          ###   ########.fr       */
+/*   Updated: 2024/02/01 13:46:14 by wnguyen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-bool is_valid_varname_expand(char c)
+bool	is_valid_varname_expand(char c)
 {
-		return (ft_isalpha(c) || c == '?');
+	return (ft_isalpha(c) || c == '?');
 }
 
-char* expand_variables(t_env *env, char *str)
+char	*expand_variables(t_env *env, char *str)
 {
-	char *result;
+	char	*result;
 
 	result = ft_strdup("");
 	while (*str)
@@ -39,30 +39,28 @@ char* expand_variables(t_env *env, char *str)
 		else
 			result = process_text_until_next_dollar(&str, result);
 	}
-
 	return (result);
 }
 
-char* process_dollar_sign(t_env *env, char **str, char *result)
+char	*process_dollar_sign(t_env *env, char **str, char *result)
 {
-		char *temp;
-		char *var_name;
+	char	*temp;
+	char	*var_name;
 
-		(*str)++;
-		var_name = extract_var_name(str);
-		temp = append_variable_value(env, result, var_name);
-		free(result);
-		result = NULL;
-		free(var_name);
-		var_name = NULL;
-
-		return (temp);
+	(*str)++;
+	var_name = extract_var_name(str);
+	temp = append_variable_value(env, result, var_name);
+	free(result);
+	result = NULL;
+	free(var_name);
+	var_name = NULL;
+	return (temp);
 }
 
-char* process_text_until_next_dollar(char **str, char *result)
+char	*process_text_until_next_dollar(char **str, char *result)
 {
-	char *next_dollar;
-	char *temp;
+	char	*next_dollar;
+	char	*temp;
 
 	if (**str == '$')
 		next_dollar = ft_strchr(*(str + 1), '$');
@@ -74,6 +72,5 @@ char* process_text_until_next_dollar(char **str, char *result)
 	free(result);
 	result = NULL;
 	*str = next_dollar;
-
 	return (temp);
 }

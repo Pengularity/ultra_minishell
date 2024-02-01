@@ -6,13 +6,13 @@
 /*   By: wnguyen <wnguyen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 11:37:17 by edesaint          #+#    #+#             */
-/*   Updated: 2024/02/01 13:18:31 by wnguyen          ###   ########.fr       */
+/*   Updated: 2024/02/01 14:10:16 by wnguyen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-t_stick_token ft_type_char(char c)
+t_stick_token	ft_type_char(char c)
 {
 	if (c == '\'')
 		return (S_QUOTE);
@@ -28,7 +28,7 @@ t_stick_token ft_type_char(char c)
 		return (S_CHAR);
 }
 
-char *transform_enum_type_token(t_state num_c)
+char	*transform_enum_type_token(t_state num_c)
 {
 	if (num_c == T_COMMAND)
 		return ("T_COMMAND");
@@ -51,7 +51,7 @@ char *transform_enum_type_token(t_state num_c)
 	return (NULL);
 }
 
-char *transform_enum_quote(t_stick_token num_c)
+char	*transform_enum_quote(t_stick_token num_c)
 {
 	if (num_c == S_QUOTE)
 		return ("S_QUOTE");

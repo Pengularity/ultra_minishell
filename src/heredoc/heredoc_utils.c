@@ -6,7 +6,7 @@
 /*   By: wnguyen <wnguyen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 20:07:13 by edesaint          #+#    #+#             */
-/*   Updated: 2024/02/01 12:38:53 by wnguyen          ###   ########.fr       */
+/*   Updated: 2024/02/01 13:51:57 by wnguyen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ char	*get_name_heredoc(void)
 
 void	get_and_save_heredoc_content(t_env *env, int fd, char *delimiter)
 {
-	char *line;
+	char	*line;
 
 	line = readline("> ");
 	while (line != NULL && ft_strcmp(line, delimiter) != 0 && errno != EINTR)

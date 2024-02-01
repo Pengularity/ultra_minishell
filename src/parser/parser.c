@@ -6,14 +6,14 @@
 /*   By: wnguyen <wnguyen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 09:33:24 by blax              #+#    #+#             */
-/*   Updated: 2024/02/01 13:17:23 by wnguyen          ###   ########.fr       */
+/*   Updated: 2024/02/01 14:07:58 by wnguyen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-void parser(t_data *data)
+void	parser(t_data *data)
 {
-    init_nodes(data);
-    fill_nodes(data);
+	init_nodes(data);
+	fill_nodes(data);
 }

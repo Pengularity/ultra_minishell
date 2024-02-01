@@ -6,7 +6,7 @@
 /*   By: wnguyen <wnguyen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 18:23:51 by blax              #+#    #+#             */
-/*   Updated: 2024/02/01 13:09:23 by wnguyen          ###   ########.fr       */
+/*   Updated: 2024/02/01 14:23:56 by wnguyen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,12 @@
 #include <readline/readline.h>
 #include <readline/history.h>
 
-volatile sig_atomic_t	signal_received = 0;
+volatile sig_atomic_t	g_signal = 0;
 
-bool ft_main(t_data *data, t_env *env)
+bool	ft_main(t_data *data, t_env *env)
 {
-	t_node *first_node;
-	
+	t_node	*first_node;
+
 	if (!is_closed_quotes(data))
 		return (free_all(data), perror("unclosed quotes"), false);
 	ft_lexer(data);
@@ -68,35 +68,41 @@ int	main(int argc, char *argv[], char **env)
 	return (0);
 }
 
-bool main_loop(t_env *my_env)
+bool	process_command(char *command, t_env *my_env)
 {
-	t_data *data;
+	t_data	*data;
+
+	if (command && *command)
+	{
+		add_history(command);
+		data = malloc_and_init_data(command, my_env);
+		if (!data)
+			return (perror("malloc failed"), false);
+		ft_main(data, my_env);
+	}
+	return (true);
+}
+
+bool	main_loop(t_env *my_env)
+{
 	char	*command;
-	
-	data = NULL;
+
 	while (1)
 	{
-		if (signal_received)
+		if (g_signal)
 		{
-			signal_received = 0;
+			g_signal = 0;
 			continue ;
 		}
 		command = readline("minishell> ");
-		if (handle_ctrl_d(command))
-			break ;
-		if (command && *command)
-		{
-			add_history(command);
-			data = malloc_and_init_data(command, my_env);
-			if (!data)
-				return (perror("malloc failed"), false);
-			ft_main(data, my_env);
-		}
-		if (command)
+		if (!command || handle_ctrl_d(command))
 		{
 			free(command);
-			command = NULL;
+			break ;
 		}
+		if (!process_command(command, my_env))
+			return (free(command), false);
+		free(command);
 	}
 	rl_clear_history();
 	return (true);

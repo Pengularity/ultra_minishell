@@ -6,23 +6,11 @@
 /*   By: wnguyen <wnguyen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 14:01:14 by letnitan          #+#    #+#             */
-/*   Updated: 2024/02/01 13:15:38 by wnguyen          ###   ########.fr       */
+/*   Updated: 2024/02/01 13:53:04 by wnguyen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
-
-void	init_env_null(t_env *env)
-{
-	env = malloc(sizeof(t_env));
-	if (!env)
-		return ;
-	env->first = NULL;
-	env->last = NULL;
-	env->len = 0;
-	env->lst_exit = 0;
-}
-
 
 t_env_link	*env_new_link(char *str)
 {
@@ -86,7 +74,7 @@ t_env	*init_mini_env(void)
 	return (mini_env);
 }
 
-t_env *init_env(char **system_env)
+t_env	*init_env(char **system_env)
 {
 	t_env		*env_main;
 	t_env_link	*current;
@@ -111,5 +99,4 @@ t_env *init_env(char **system_env)
 	env_main->last = current;
 	env_main->lst_exit = 0;
 	return (env_main);
-
 }

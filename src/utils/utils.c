@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: edesaint <edesaint@student.42.fr>          +#+  +:+       +#+        */
+/*   By: wnguyen <wnguyen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 11:23:27 by edesaint          #+#    #+#             */
-/*   Updated: 2024/01/31 17:59:53 by edesaint         ###   ########.fr       */
+/*   Updated: 2024/02/01 14:11:05 by wnguyen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ t_token	*ft_token_last(t_token *token)
 
 void	ft_token_iter(t_data *data, bool (*f)(t_token *))
 {
-	t_token *token;
+	t_token	*token;
 
 	token = data->token;
 	while (token)
@@ -50,9 +50,9 @@ void	ft_token_iter(t_data *data, bool (*f)(t_token *))
 
 void	ft_token_iter_expander(t_data *data, char *(*f)(t_env *, char *))
 {
-	t_token *token;
-	t_env *tmp_env;
-	
+	t_token	*token;
+	t_env	*tmp_env;
+
 	token = data->token;
 	tmp_env = data->env;
 	while (token)
@@ -63,16 +63,16 @@ void	ft_token_iter_expander(t_data *data, char *(*f)(t_env *, char *))
 	}
 }
 
-bool process_tokens(t_data *data, bool (*f)(char *str))
+bool	process_tokens(t_data *data, bool (*f)(char *str))
 {
-    t_token *token;
+	t_token	*token;
 
-    token = data->token;
-    while (token)
-    {
-        if (!f(token->str))
-            return (false);
-        token = token->next;
-    }
-    return (true);
+	token = data->token;
+	while (token)
+	{
+		if (!f(token->str))
+			return (false);
+		token = token->next;
+	}
+	return (true);
 }

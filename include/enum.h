@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   enum.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: edesaint <edesaint@student.42.fr>          +#+  +:+       +#+        */
+/*   By: wnguyen <wnguyen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 16:22:37 by blax              #+#    #+#             */
-/*   Updated: 2024/01/28 15:37:38 by edesaint         ###   ########.fr       */
+/*   Updated: 2024/02/01 14:28:23 by wnguyen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,9 @@ typedef enum e_state {
 	T_PIPE,
 	T_FILE,
 	T_REDIR_IN,
-    T_REDIR_OUT,
-    T_REDIR_APPEND,
-    T_REDIR_HEREDOC
+	T_REDIR_OUT,
+	T_REDIR_APPEND,
+	T_REDIR_HEREDOC,
 }	t_state;
 
 typedef enum e_stick_token {

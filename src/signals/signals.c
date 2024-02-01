@@ -6,7 +6,7 @@
 /*   By: wnguyen <wnguyen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 10:53:36 by wnguyen           #+#    #+#             */
-/*   Updated: 2024/02/01 13:17:18 by wnguyen          ###   ########.fr       */
+/*   Updated: 2024/02/01 14:15:35 by wnguyen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	handle_sigint(int signum)
 	(void)signum;
 	ft_putstr_fd("\n", STDERR_FILENO);
 	rl_replace_line("", 0);
-	signal_received = 1;
+	g_signal = 1;
 }
 
 bool	handle_ctrl_d(char *input)

@@ -6,7 +6,7 @@
 /*   By: wnguyen <wnguyen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 22:31:24 by edesaint          #+#    #+#             */
-/*   Updated: 2024/02/01 12:48:48 by wnguyen          ###   ########.fr       */
+/*   Updated: 2024/02/01 13:50:53 by wnguyen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ void	ft_free_tab(char **s, int i)
 	free(s);
 }
 
-void free_tokens(t_token *token)
+void	free_tokens(t_token *token)
 {
-	t_token *tmp_token;
+	t_token	*tmp_token;
 
 	if (!token)
 		return ;
@@ -44,7 +44,7 @@ void free_tokens(t_token *token)
 	}
 }
 
-void free_data(t_data *data)
+void	free_data(t_data *data)
 {
 	if (!data)
 		return ;

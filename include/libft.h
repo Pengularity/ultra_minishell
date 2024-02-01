@@ -6,7 +6,7 @@
 /*   By: wnguyen <wnguyen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 21:10:09 by wnguyen           #+#    #+#             */
-/*   Updated: 2024/02/01 12:55:59 by wnguyen          ###   ########.fr       */
+/*   Updated: 2024/02/01 14:28:54 by wnguyen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@
 # include <fcntl.h>
 # include <wchar.h>
 # include <stdbool.h>
-
 
 typedef struct s_list
 {

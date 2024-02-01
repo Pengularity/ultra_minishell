@@ -6,7 +6,7 @@
 /*   By: wnguyen <wnguyen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 16:19:02 by blax              #+#    #+#             */
-/*   Updated: 2024/02/01 13:31:51 by wnguyen          ###   ########.fr       */
+/*   Updated: 2024/02/01 14:38:35 by wnguyen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ typedef struct s_token
 {
 	int				id;
 	char			*str;
-    bool            is_space;
+	bool			is_space;
 	t_stick_token	type_str;
 	t_stick_token	type_rstick;
 	t_stick_token	type_lstick;
@@ -46,28 +46,28 @@ typedef struct s_token
 
 typedef struct s_node
 {
-    int                 id;
-    bool				type;
-    char                **tab_exec;
-    char			    *redir_in;
+	int					id;
+	bool				type;
+	char				**tab_exec;
+	char				*redir_in;
 	char				*redir_out;
 	char				*redir_append;
-	struct s_node       *next;
-} t_node;
+	struct s_node		*next;
+}				t_node;
 
 typedef struct s_data
 {
-    int             start;
-    int             end;
-    int             nb_tokens;
-    int             nb_nodes;
-    bool            is_space;
-    char            type_quote;
-    bool            in_quote;
-    char            *str;
-    struct s_token	*token;
+	int				start;
+	int				end;
+	int				nb_tokens;
+	int				nb_nodes;
+	bool			is_space;
+	char			type_quote;
+	bool			in_quote;
+	char			*str;
+	struct s_token	*token;
 	struct s_node	*node;
-	struct s_env    *env;
+	struct s_env	*env;
 }				t_data;
 
 #endif
