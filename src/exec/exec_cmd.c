@@ -6,7 +6,7 @@
 /*   By: wnguyen <wnguyen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 15:57:41 by wnguyen           #+#    #+#             */
-/*   Updated: 2024/02/02 17:45:56 by wnguyen          ###   ########.fr       */
+/*   Updated: 2024/02/02 19:56:34 by wnguyen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,30 @@ bool	execute_command(t_node *node, char **envp)
 	return (true);
 }
 
+static bool	handle_output_redirection(t_node *node, int *pipe_fds)
+{
+	if (node->next && node->redir_out == NULL && node->redir_append == NULL)
+	{
+		if (pipe_fds[0] != -1)
+			close(pipe_fds[0]);
+		if (dup2(pipe_fds[1], STDOUT_FILENO) == -1)
+		{
+			perror("dup2 error");
+			return (false);
+		}
+		if (pipe_fds[1] != -1)
+			close(pipe_fds[1]);
+	}
+	else if (node->next)
+	{
+		if (pipe_fds[1] != -1)
+			close(pipe_fds[1]);
+		if (pipe_fds[0] != -1)
+			close(pipe_fds[0]);
+	}
+	return (true);
+}
+
 static bool	setup_child(t_node *node, int in_fd, int *pipe_fds)
 {
 	if (!exec_redir(node))
@@ -51,18 +75,7 @@ static bool	setup_child(t_node *node, int in_fd, int *pipe_fds)
 		if (in_fd != -1)
 			close(in_fd);
 	}
-	if (node->next)
-	{
-		if (pipe_fds[0] != -1)
-			close(pipe_fds[0]);
-		if (dup2(pipe_fds[1], STDOUT_FILENO) == -1)
-		{
-			perror("dup2 error");
-			return (false);
-		}
-		if (pipe_fds[1] != -1)
-			close(pipe_fds[1]);
-	}
+	handle_output_redirection(node, pipe_fds);
 	return (true);
 }
 
@@ -87,7 +100,7 @@ void	exec_child_process(t_node *node, int in_fd, t_env *env, int *pipe_fds)
 	free_nodes(node);
 	node = NULL;
 	free_env(env);
-	exit(exit_status % 256);
+	exit(exit_status);
 }
 
 void	manage_parent_process(int *in_fd, int *pipe_fds, t_node *current_node)

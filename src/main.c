@@ -6,7 +6,7 @@
 /*   By: wnguyen <wnguyen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 18:23:51 by blax              #+#    #+#             */
-/*   Updated: 2024/02/02 17:29:28 by wnguyen          ###   ########.fr       */
+/*   Updated: 2024/02/02 18:48:18 by wnguyen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ bool	main_loop(t_env *env)
 	{
 		g_signal = IN_PROMPT;
 		command = readline("minishell> ");
-		while (g_signal == SIG_INT)
+		if (g_signal == SIG_INT)
 		{
 			env->lst_exit = 130;
 			g_signal = IN_PROMPT;

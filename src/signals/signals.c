@@ -6,7 +6,7 @@
 /*   By: wnguyen <wnguyen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 10:53:36 by wnguyen           #+#    #+#             */
-/*   Updated: 2024/02/02 17:30:39 by wnguyen          ###   ########.fr       */
+/*   Updated: 2024/02/02 18:39:39 by wnguyen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ void	handle_sigint(int signum)
 		rl_on_new_line();
 	}
 	g_signal = SIG_INT;
-	g_signal = IN_PROMPT;
 }
 
 bool	handle_ctrl_d(char *input)
@@ -44,6 +43,11 @@ bool	handle_ctrl_d(char *input)
 void	setup_sigint_handling(void)
 {
 	struct sigaction	sa;
+
+	sa.sa_handler = SIG_IGN;
+    sigemptyset(&sa.sa_mask);
+    sa.sa_flags = 0;
+    sigaction(SIGQUIT, &sa, NULL);
 
 	sa.sa_handler = &handle_sigint;
 	sigemptyset(&sa.sa_mask);
