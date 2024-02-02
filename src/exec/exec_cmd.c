@@ -6,13 +6,13 @@
 /*   By: wnguyen <wnguyen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 15:57:41 by wnguyen           #+#    #+#             */
-/*   Updated: 2024/02/02 19:56:34 by wnguyen          ###   ########.fr       */
+/*   Updated: 2024/02/02 20:17:44 by wnguyen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-bool	execute_command(t_node *node, char **envp)
+bool	execute_command(t_node *node, char **envp, t_env *env)
 {
 	char	*cmd_path;
 
@@ -22,7 +22,7 @@ bool	execute_command(t_node *node, char **envp)
 		cmd_path = get_cmd_path(node->tab_exec[0], envp);
 	if (!cmd_path)
 	{
-		ft_putstr_fd("minishell: ", STDERR_FILENO);
+		env->lst_exit = 127;
 		ft_putstr_fd(node->tab_exec[0], STDERR_FILENO);
 		ft_putendl_fd(": command not found", STDERR_FILENO);
 		free(cmd_path);
@@ -93,7 +93,7 @@ void	exec_child_process(t_node *node, int in_fd, t_env *env, int *pipe_fds)
 			exec_builtin(node, env);
 			exit_status = env->lst_exit;
 		}
-		else if (execute_command(node, envp))
+		else if (execute_command(node, envp, env))
 			exit_status = EXIT_SUCCESS;
 	}
 	free_tab(envp);

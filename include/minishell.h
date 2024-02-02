@@ -6,7 +6,7 @@
 /*   By: wnguyen <wnguyen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 08:31:10 by blax              #+#    #+#             */
-/*   Updated: 2024/02/02 17:02:00 by wnguyen          ###   ########.fr       */
+/*   Updated: 2024/02/02 20:17:15 by wnguyen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -302,7 +302,7 @@ int				builtin_command(t_node *node, t_env *env);
 bool			exec_builtin(t_node *node, t_env *env);
 
 // exec_cmd.c
-bool			execute_command(t_node *node, char **envp);
+bool			execute_command(t_node *node, char **envp, t_env *env);
 void			exec_child_process(t_node *node, int in_fd,
 					t_env *env, int *pipe_fds);
 void			manage_parent_process(int *in_fd, int *pipe_fds,

@@ -6,7 +6,7 @@
 /*   By: wnguyen <wnguyen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 10:04:08 by blax              #+#    #+#             */
-/*   Updated: 2024/02/01 19:32:22 by wnguyen          ###   ########.fr       */
+/*   Updated: 2024/02/02 20:22:38 by wnguyen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,12 @@ static bool	execute_single_child(t_node *node, t_env *env)
 	if (!exec_redir(node))
 		exit(EXIT_FAILURE);
 	envp = convert_env_to_tab(env);
-	if (!execute_command(node, envp))
+	if (!execute_command(node, envp, env))
 	{
 		free_tab(envp);
 		free_node(node);
 		free_env(env);
-		exit(EXIT_FAILURE);
+		exit(127);
 	}
 	free_tab(envp);
 	free_node(node);

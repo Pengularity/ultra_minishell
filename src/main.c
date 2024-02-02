@@ -6,7 +6,7 @@
 /*   By: wnguyen <wnguyen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 18:23:51 by blax              #+#    #+#             */
-/*   Updated: 2024/02/02 18:48:18 by wnguyen          ###   ########.fr       */
+/*   Updated: 2024/02/02 20:56:13 by wnguyen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ bool	ft_main(t_data *data, t_env *env)
 	free(data);
 	data = NULL;
 	execute_command_node(first_node, env);
-	g_signal = IN_PROMPT;
 	return (true);
 }
 
@@ -57,9 +56,6 @@ int	main(int argc, char *argv[], char **env)
 		return (printf("minishell : parameters : bad usage\n"), 0);
 	my_env = NULL;
 	argv[0] = '\0';
-	// signal(SIGQUIT, SIG_IGN);
-	// signal(SIGINT, handle_sigint);
-	setup_sigint_handling();
 	if (!env || !env[0])
 		my_env = init_mini_env();
 	else
@@ -90,16 +86,16 @@ bool	main_loop(t_env *env)
 {
 	char	*command;
 
+	setup_sigint_handling();
 	while (1)
 	{
 		g_signal = IN_PROMPT;
 		command = readline("minishell> ");
-		if (g_signal == SIG_INT)
-		{
-			env->lst_exit = 130;
-			g_signal = IN_PROMPT;
-			rl_redisplay();
-		}
+		// if (g_signal == SIGINT)
+		// {
+		// 	env->lst_exit = 130;
+		// 	g_signal = IN_PROMPT;
+		// }
 		if (!command || handle_ctrl_d(command))
 		{
 			free(command);
