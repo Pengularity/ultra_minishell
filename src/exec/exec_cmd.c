@@ -6,7 +6,7 @@
 /*   By: wnguyen <wnguyen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 15:57:41 by wnguyen           #+#    #+#             */
-/*   Updated: 2024/02/01 19:32:22 by wnguyen          ###   ########.fr       */
+/*   Updated: 2024/02/02 17:45:56 by wnguyen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ void	exec_child_process(t_node *node, int in_fd, t_env *env, int *pipe_fds)
 	free_nodes(node);
 	node = NULL;
 	free_env(env);
-	exit(exit_status);
+	exit(exit_status % 256);
 }
 
 void	manage_parent_process(int *in_fd, int *pipe_fds, t_node *current_node)

@@ -6,32 +6,57 @@
 /*   By: wnguyen <wnguyen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 21:22:06 by wnguyen           #+#    #+#             */
-/*   Updated: 2024/02/01 13:41:57 by wnguyen          ###   ########.fr       */
+/*   Updated: 2024/02/02 18:22:36 by wnguyen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-static int	is_valid_exit_num(const char *str)
+static bool	is_overflow(const char *str)
 {
-	int	i;
-	int	num;
+	long long	res;
+	int			i;
 
+	res = 0;
 	i = 0;
-	if (str[i] == '-')
-		return (0);
+	while (str[i] == ' ' || str[i] == '\t' || str[i] == '\n' || str[i] == '\v')
+		i++;
+	if (str[i] == '+' || str[i] == '-')
+		i++;
 	while (str[i] == '0')
 		i++;
 	while (str[i])
 	{
 		if (!ft_isdigit(str[i]))
-			return (0);
+			return (true);
+		if (res > LLONG_MAX / 10 || (res == LLONG_MAX / 10 && (str[i] - '0')
+				> LLONG_MAX % 10))
+			return (true);
+		res = res * 10 + (str[i++] - '0');
+	}
+	return (false);
+}
+
+static bool	is_valid_exit_num(const char *str)
+{
+	int		i;
+
+	i = 0;
+	while (str[i] == ' ' || str[i] == '\t' || str[i] == '\n' || str[i] == '\v')
+		i++;
+	if (str[i] == '-' || str[i] == '+')
+		i++;
+	while (str[i] == '0')
+		i++;
+	while (str[i])
+	{
+		if (!ft_isdigit(str[i]))
+			return (false);
 		i++;
 	}
-	num = ft_atoi(str);
-	if (num < 0 || num > 255)
-		return (0);
-	return (1);
+	if (is_overflow(str))
+		return (false);
+	return (true);
 }
 
 static void	exit_with_error(char *arg)
@@ -45,7 +70,7 @@ static void	exit_with_error(char *arg)
 bool	ft_exit(t_node *node, t_env *env)
 {
 	char	**args;
-	int		exit_status;
+	long	exit_status;
 
 	args = node->tab_exec;
 	exit_status = 0;
@@ -63,6 +88,6 @@ bool	ft_exit(t_node *node, t_env *env)
 		return (false);
 	}
 	exit_status = ft_atoi(args[1]);
-	env->lst_exit = exit_status;
+	env->lst_exit = (unsigned char)exit_status;
 	return (true);
 }

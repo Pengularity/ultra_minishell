@@ -6,7 +6,7 @@
 /*   By: wnguyen <wnguyen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 08:31:10 by blax              #+#    #+#             */
-/*   Updated: 2024/02/01 17:38:40 by wnguyen          ###   ########.fr       */
+/*   Updated: 2024/02/02 17:02:00 by wnguyen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -316,5 +316,6 @@ void			exec_pipeline(t_node *node, t_env *env);
 // signals.c
 void			handle_sigint(int signum);
 bool			handle_ctrl_d(char *input);
+void			setup_sigint_handling(void);
 
 #endif
