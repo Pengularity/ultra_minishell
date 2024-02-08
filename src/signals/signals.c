@@ -6,7 +6,7 @@
 /*   By: wnguyen <wnguyen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 10:53:36 by wnguyen           #+#    #+#             */
-/*   Updated: 2024/02/02 20:54:26 by wnguyen          ###   ########.fr       */
+/*   Updated: 2024/02/08 13:59:08 by wnguyen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ void	setup_sigint_handling(void)
 	sigemptyset(&sa.sa_mask);
 	sa.sa_flags = 0;
 	sigaction(SIGQUIT, &sa, NULL);
-
 	sa.sa_handler = &handle_sigint;
 	sigemptyset(&sa.sa_mask);
 	sa.sa_flags = SA_RESTART;

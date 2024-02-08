@@ -6,7 +6,7 @@
 /*   By: wnguyen <wnguyen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 18:23:51 by blax              #+#    #+#             */
-/*   Updated: 2024/02/02 20:56:13 by wnguyen          ###   ########.fr       */
+/*   Updated: 2024/02/08 14:00:10 by wnguyen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,12 @@ bool	main_loop(t_env *env)
 			free(command);
 			break ;
 		}
+		if (strcmp(command, "history") == 0)
+		{
+			display_history();
+			free(command);
+			continue ;
+		}
 		if (!process_command(command, env))
 			return (free(command), false);
 		free(command);
@@ -108,3 +114,4 @@ bool	main_loop(t_env *env)
 	rl_clear_history();
 	return (true);
 }
+

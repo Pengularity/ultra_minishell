@@ -6,7 +6,7 @@
 /*   By: wnguyen <wnguyen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 12:26:37 by wnguyen           #+#    #+#             */
-/*   Updated: 2024/01/31 21:43:42 by wnguyen          ###   ########.fr       */
+/*   Updated: 2024/02/08 13:56:45 by wnguyen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,4 +65,18 @@ char	*get_cmd_path(char *cmd, char **envp)
 			return (NULL);
 	}
 	return (full_path);
+}
+
+void	display_history(void)
+{
+	HIST_ENTRY	**the_history_list;
+	int			i;
+
+	i = 0;
+	the_history_list = history_list();
+	while (the_history_list[i])
+	{
+		printf("%d: %s\n", i + 1, the_history_list[i]->line);
+		i++;
+	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_redir.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: edesaint <edesaint@student.42.fr>          +#+  +:+       +#+        */
+/*   By: wnguyen <wnguyen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 16:15:34 by wnguyen           #+#    #+#             */
-/*   Updated: 2024/02/01 15:25:20 by edesaint         ###   ########.fr       */
+/*   Updated: 2024/02/08 13:58:52 by wnguyen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ bool	exec_redir_1(t_node *node)
 		{
 			return (false);
 		}
-	}	
+	}
 	return (true);
 }
 

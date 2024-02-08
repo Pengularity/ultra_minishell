@@ -6,7 +6,7 @@
 /*   By: wnguyen <wnguyen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 08:31:10 by blax              #+#    #+#             */
-/*   Updated: 2024/02/02 20:17:15 by wnguyen          ###   ########.fr       */
+/*   Updated: 2024/02/08 13:55:07 by wnguyen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -280,6 +280,7 @@ bool			execute_single_cmd(t_node *node, t_env *env);
 
 // get_path.c
 char			*get_cmd_path(char *cmd, char **envp);
+void			display_history(void);
 
 // exec_redir.c
 bool			exec_redir(t_node *node);
