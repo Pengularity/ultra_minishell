@@ -6,7 +6,7 @@
 /*   By: wnguyen <wnguyen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 18:23:51 by blax              #+#    #+#             */
-/*   Updated: 2024/02/08 14:00:10 by wnguyen          ###   ########.fr       */
+/*   Updated: 2024/02/08 14:36:20 by wnguyen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ bool	ft_main(t_data *data, t_env *env)
 		return (free_all(data), false);
 	determine_token_types(data);
 	if (!verif_syntax(data->token))
-		return (free_all(data), perror("syntax_erreur"), false);
+		return (free_all(data), perror("syntax error"), env->lst_exit = 2, false);
 	if (!pass_on_filters(data))
 		return (free_all(data), perror("filter_erreur"), false);
 	parser(data);

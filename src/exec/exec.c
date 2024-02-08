@@ -6,7 +6,7 @@
 /*   By: wnguyen <wnguyen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 10:04:08 by blax              #+#    #+#             */
-/*   Updated: 2024/02/02 20:22:38 by wnguyen          ###   ########.fr       */
+/*   Updated: 2024/02/08 19:30:09 by wnguyen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,16 @@ bool	execute_single_cmd(t_node *node, t_env *env)
 
 static void	execute_exit_command(t_node *node, t_env *env)
 {
+	long	exit_status;
+
 	ft_putendl_fd("exit", STDOUT_FILENO);
+	if (node->tab_exec[1] && ft_exit(node, env))
+	{
+		exit_status = ft_atoi(node->tab_exec[1]);
+		free_node(node);
+		free_env(env);
+		exit(exit_status);
+	}
 	if (ft_exit(node, env))
 	{
 		free_node(node);
