@@ -1,0 +1,15 @@
+total 348
+drwxrwxr-x  9 wnguyen wnguyen   4096 févr.  9 07:07 .
+drwxrwxr-x 11 wnguyen wnguyen   4096 févr.  7 17:07 ..
+-rw-rw-r--  1 wnguyen wnguyen     72 févr.  8 19:30 a_faire.txt
+drwxrwxr-x  4 wnguyen wnguyen   4096 févr.  9 07:08 Docs
+drwxrwxr-x  8 wnguyen wnguyen   4096 févr.  8 19:30 .git
+-rw-rw-r--  1 wnguyen wnguyen    135 févr.  7 17:07 ignore_readline.supp
+drwxrwxr-x  2 wnguyen wnguyen   4096 févr.  7 17:07 include
+drwxrwxr-x  4 wnguyen wnguyen   4096 févr.  8 19:37 libft
+-rw-rw-r--  1 wnguyen wnguyen   2745 févr.  7 17:07 Makefile
+-rwxrwxr-x  1 wnguyen wnguyen 157576 févr.  8 19:37 minishell
+-rwxrwxr-x  1 wnguyen wnguyen 147096 févr.  7 17:07 .nfs00000000105e15c200000084
+drwxrwxr-x 15 wnguyen wnguyen   4096 févr.  8 19:37 obj
+drwxrwxr-x 15 wnguyen wnguyen   4096 févr.  7 17:25 src
+drwxrwxr-x  2 wnguyen wnguyen   4096 févr.  7 17:13 .vscode

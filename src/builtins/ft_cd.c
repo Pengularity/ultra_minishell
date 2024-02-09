@@ -6,7 +6,7 @@
 /*   By: wnguyen <wnguyen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 13:51:49 by wnguyen           #+#    #+#             */
-/*   Updated: 2024/02/01 13:42:06 by wnguyen          ###   ########.fr       */
+/*   Updated: 2024/02/09 08:09:32 by wnguyen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ void	update_pwd(t_env *env)
 static char	*get_cd_path(t_node *node, t_env *env, bool *is_allocated)
 {
 	char	*path;
+	char	*oldpwd;
 
 	*is_allocated = 0;
 	if (node->tab_exec[1] && ft_strcmp(node->tab_exec[1], "~") != 0)
@@ -49,7 +50,10 @@ static char	*get_cd_path(t_node *node, t_env *env, bool *is_allocated)
 	}
 	if (ft_strcmp(path, "-") == 0)
 	{
-		path = get_env_name(env, "OLDPWD");
+		oldpwd = get_env_name(env, "OLDPWD");
+		if (!oldpwd)
+			return (ft_putstr_fd("cd: OLDPWD not set\n", STDERR_FILENO), NULL);
+		path = ft_strdup(oldpwd);
 		if (!path)
 			return (NULL);
 		*is_allocated = 1;
@@ -81,7 +85,11 @@ bool	ft_cd(t_node *node, t_env *env)
 	{
 		if (is_path_allocated)
 			free(path);
-		return (handle_cd_error(env, "cd: chdir error\n", 1, NULL));
+		ft_putstr_fd("minishell: cd: ", STDERR_FILENO);
+		ft_putstr_fd(node->tab_exec[1], STDERR_FILENO);
+		ft_putendl_fd(": No such file or directory", STDERR_FILENO);
+		env->lst_exit = 1;
+		return (false);
 	}
 	update_pwd(env);
 	if (is_path_allocated)

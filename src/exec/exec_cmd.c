@@ -6,7 +6,7 @@
 /*   By: wnguyen <wnguyen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 15:57:41 by wnguyen           #+#    #+#             */
-/*   Updated: 2024/02/02 20:17:44 by wnguyen          ###   ########.fr       */
+/*   Updated: 2024/02/09 07:38:45 by wnguyen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ void	exec_child_process(t_node *node, int in_fd, t_env *env, int *pipe_fds)
 	int		exit_status;
 
 	envp = convert_env_to_tab(env);
-	exit_status = EXIT_FAILURE;
+	env->lst_exit = EXIT_FAILURE;
 	if (setup_child(node, in_fd, pipe_fds))
 	{
 		if (is_builtin(node))
@@ -95,6 +95,8 @@ void	exec_child_process(t_node *node, int in_fd, t_env *env, int *pipe_fds)
 		}
 		else if (execute_command(node, envp, env))
 			exit_status = EXIT_SUCCESS;
+		else
+			exit_status = env->lst_exit;
 	}
 	free_tab(envp);
 	free_nodes(node);

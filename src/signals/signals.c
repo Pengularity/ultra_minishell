@@ -6,7 +6,7 @@
 /*   By: wnguyen <wnguyen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 10:53:36 by wnguyen           #+#    #+#             */
-/*   Updated: 2024/02/08 13:59:08 by wnguyen          ###   ########.fr       */
+/*   Updated: 2024/02/09 07:48:52 by wnguyen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	handle_sigint(int signum)
 		rl_replace_line("", 0);
 		rl_on_new_line();
 	}
-	g_signal = SIGINT;
+	// g_signal = SIGINT;
 }
 
 bool	handle_ctrl_d(char *input)
