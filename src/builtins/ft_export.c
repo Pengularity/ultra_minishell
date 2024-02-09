@@ -6,7 +6,7 @@
 /*   By: wnguyen <wnguyen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 21:00:04 by wnguyen           #+#    #+#             */
-/*   Updated: 2024/01/31 23:33:54 by wnguyen          ###   ########.fr       */
+/*   Updated: 2024/02/09 09:42:21 by wnguyen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ static bool	process_export_arg(char *arg, t_env *env)
 	char	*name;
 	char	*content;
 	bool	status;
+	char	*value;
 
 	status = true;
 	if (check_env_name(arg))
@@ -72,8 +73,15 @@ static bool	process_export_arg(char *arg, t_env *env)
 			free(name);
 			free(content);
 		}
-		else
-			add_env_var(env, arg, "");
+		else if (!get_env_name(env, arg))
+		{
+			value = get_env_name(env, arg);
+			if (value)
+			{
+				add_env_var(env, arg, value);
+				free(value);
+			}
+		}
 	}
 	else
 	{

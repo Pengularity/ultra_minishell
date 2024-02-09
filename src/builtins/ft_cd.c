@@ -6,7 +6,7 @@
 /*   By: wnguyen <wnguyen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 13:51:49 by wnguyen           #+#    #+#             */
-/*   Updated: 2024/02/09 08:09:32 by wnguyen          ###   ########.fr       */
+/*   Updated: 2024/02/09 09:56:12 by wnguyen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,10 @@ static char	*get_cd_path(t_node *node, t_env *env, bool *is_allocated)
 	else
 	{
 		path = get_env_name(env, "HOME");
-		if (!path)
+		if (path && ft_strlen(path) == 0)
 			return (NULL);
+		if (!path)
+			return ((ft_putstr_fd("cd: HOME not set\n", STDERR_FILENO), NULL));
 	}
 	if (ft_strcmp(path, "-") == 0)
 	{
@@ -79,15 +81,21 @@ bool	ft_cd(t_node *node, t_env *env)
 		return (handle_cd_error(env, "cd: too many arguments\n", 1, NULL));
 	path = get_cd_path(node, env, &is_path_allocated);
 	if (!path)
-		return (handle_cd_error(env, "cd: path error\n", 1, NULL));
+		return (NULL);
 	update_oldpwd(env);
 	if (chdir(path) == -1)
 	{
 		if (is_path_allocated)
 			free(path);
 		ft_putstr_fd("minishell: cd: ", STDERR_FILENO);
-		ft_putstr_fd(node->tab_exec[1], STDERR_FILENO);
-		ft_putendl_fd(": No such file or directory", STDERR_FILENO);
+		if (!node->tab_exec[1] || (node->tab_exec[1]
+				&& ft_strcmp(node->tab_exec[1], "$HOME") == 0))
+			ft_putendl_fd(": HOME not set", STDERR_FILENO);
+		else
+		{
+			ft_putstr_fd(node->tab_exec[1], STDERR_FILENO);
+			ft_putendl_fd(": No such file or directory", STDERR_FILENO);
+		}
 		env->lst_exit = 1;
 		return (false);
 	}
